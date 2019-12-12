@@ -8,7 +8,7 @@ if __name__ == "__main__":
     if len(argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         exit(1)
-    elif operators.get(argv[2]) != None:
+    elif operators.get(argv[2]) is not None:
         a = int(argv[1])
         b = int(argv[3])
         print("{}".format(operators[argv[2]](a, b)))
