@@ -6,6 +6,6 @@ if __name__ == "__main__":
     result = 0
 
     if num > 1:
-        for i in range (1, num):
+        for i in range(1, num):
             result += int(argv[i])
     print("{:d}".format(result))
