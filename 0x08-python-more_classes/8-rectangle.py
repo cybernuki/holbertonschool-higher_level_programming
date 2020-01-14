@@ -65,7 +65,6 @@ class Rectangle:
         string = []
         for i in range (self.__height):
             string.append(str(self.print_symbol) * self.__width)
-            print(string)
         return "\n".join(string)
 
     def __repr__(self):
