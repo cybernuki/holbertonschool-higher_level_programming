@@ -3,8 +3,7 @@
 class Rectangle:
     """A rectangle class"""
     def __init__(self, width=0, height=0):
-         """Initialize a new Rectangle.
-
+        """Initialize a new Rectangle.
         Args:
             width (int): The width of the new Rectangle.
             heigh (int): The height of the new Rectangle.
