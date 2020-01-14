@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """this module contain the class Rectangle"""
+
+
 class Rectangle:
     """A rectangle class"""
     def __init__(self, width=0, height=0):
@@ -15,7 +17,7 @@ class Rectangle:
     def width(self):
         """Width getter"""
         return self.__width
-    
+
     @width.setter
     def width(self, width):
         """Width setter"""
@@ -24,7 +26,7 @@ class Rectangle:
         if width < 0:
             raise ValueError("width must be >= 0")
         self.__width = width
-    
+
     @property
     def height(self):
         """height getter"""
@@ -52,12 +54,13 @@ class Rectangle:
 
     def __str__(self):
         """prints the rectangle"""
-        if self.__height == 0 or self.__width ==0:
+        if self.__height == 0 or self.__width == 0:
             return ""
         string = []
-        for i in range (self.__height):
+        for i in range(self.__height):
             string.append("#" * self.__width)
         return "\n".join(string)
 
     def __repr__(self):
-        return "{:s}({:d},{:d})".format(self.__class__.__name__, self.__width, self.__height)
+        return "{:s}({:d},{:d})".\
+            format(self.__class__.__name__, self.__width, self.__height)

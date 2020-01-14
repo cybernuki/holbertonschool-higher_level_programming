@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
-#!/usr/bin/python3
 """this module contain the class Rectangle"""
+
+
 class Rectangle:
 
     number_of_instances = 0
@@ -22,7 +22,7 @@ class Rectangle:
     def width(self):
         """Width getter"""
         return self.__width
-    
+
     @width.setter
     def width(self, width):
         """Width setter"""
@@ -31,7 +31,7 @@ class Rectangle:
         if width < 0:
             raise ValueError("width must be >= 0")
         self.__width = width
-    
+
     @property
     def height(self):
         """height getter"""
@@ -59,18 +59,18 @@ class Rectangle:
 
     def __str__(self):
         """prints the rectangle"""
-        if self.__height == 0 or self.__width ==0:
+        if self.__height == 0 or self.__width == 0:
             return ""
         string = []
-        for i in range (self.__height):
+        for i in ranges(self.__height):
             string.append(str(self.print_symbol) * self.__width)
         return "\n".join(string)
 
     def __repr__(self):
-        return "{:s}({:d},{:d})".format(self.__class__.__name__, self.__width, self.__height)
+        return "{:s}({:d},{:d})".\
+            format(self.__class__.__name__, self.__width, self.__height)
 
     def __del__(self):
         """print a message when an instance is deleted"""
         print("Bye rectangle...")
         type(self).number_of_instances -= 1
-

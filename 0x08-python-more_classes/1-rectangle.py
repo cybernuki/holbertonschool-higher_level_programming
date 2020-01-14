@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """this module contain the class Rectangle"""
+
+
 class Rectangle:
     """A rectangle class"""
     def __init__(self, width=0, height=0):
@@ -16,7 +18,7 @@ class Rectangle:
     def width(self):
         """Width getter"""
         return self.__width
-    
+
     @width.setter
     def width(self, width):
         """Width setter"""
@@ -25,7 +27,7 @@ class Rectangle:
         if width < 0:
             raise ValueError("width must be >= 0")
         self.__width = width
-    
+
     @property
     def height(self):
         """height getter"""
