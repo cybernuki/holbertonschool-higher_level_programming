@@ -62,5 +62,5 @@ class Rectangle:
         return "\n".join(string)
 
     def __repr__(self):
-        return "{:s}({:d},{:d})".\
+        return "{:s}({:d}, {:d})".\
             format(self.__class__.__name__, self.__width, self.__height)
