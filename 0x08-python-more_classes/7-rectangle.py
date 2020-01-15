@@ -41,9 +41,9 @@ class Rectangle:
     def height(self, height):
         """height setter"""
         if type(height) is not int:
-            raise TypeError("width must be an integer")
+            raise TypeError("height must be an integer")
         if height < 0:
-            raise ValueError("width must be >= 0")
+            raise ValueError("height must be >= 0")
         self.__height = height
 
     def area(self):
@@ -62,7 +62,7 @@ class Rectangle:
         if self.__height == 0 or self.__width == 0:
             return ""
         string = []
-        for i in ranges(self.__height):
+        for i in range(self.__height):
             string.append(str(self.print_symbol) * self.__width)
         return "\n".join(string)
 
