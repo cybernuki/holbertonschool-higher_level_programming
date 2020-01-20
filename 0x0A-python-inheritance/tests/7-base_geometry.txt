@@ -1,0 +1,122 @@
+# 7-base_geometry.txt
+# Jhonatan Arenas <1164@holbertonschool.com>
+
+:::::::::::::::::::::::::::::::::
+ How to use 7-geometry_module.py
+:::::::::::::::::::::::::::::::::
+
+This module contains the BaseGeometry Class 
+
+
+Instantiation:
+==============
+
+``BaseGeometry``is a non attribute class. So that, it doesn't recieve any arguments
+in the __init__ method
+
+---
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    >>> bg = BaseGeometry()
+    >>> type(bg)
+    <class '7-base_geometry.BaseGeometry'>
+
+---
+    >>> print(bg) # doctest: +ELLIPSIS
+    <7-base_geometry.BaseGeometry object at ...>
+
+Gives any argument results in a raising of TypeError
+
+---
+    >>> bg = BaseGeometry("Hello")
+    Traceback (most recent call last):
+    TypeError: object() takes no parameters
+
+Methods:
+========
+
+``BaseGeometry`` has two methods - ``area(self)``
+and ``integer_validator(self, name, value)``.
+The first one is not implemented
+
+>>> bg = BaseGeometry()
+>>> print(bg.area) # doctest: +ELLIPSIS
+<bound method BaseGeometry.area of <7-base_geometry.BaseGeometry object at ...>
+
+>>> print(bg.integer_validator) # doctest: +ELLIPSIS
+<bound method BaseGeometry.integer_validator of <7-base_geometry.BaseGeometry object at ...>
+
+
+``area``:
+=========
+As mentioned before, this method is not implemented.
+It just raise an Error with the message: ``area() is not implemented``
+
+>>> bg.area()
+Traceback (most recent call last):
+Exception: area() is not implemented
+
+``integer_validator``:
+======================
+This method recived a "name" paramater that is an string 
+and an associated integer "value" parameter
+
+Finally evaluate if the "value" parameter is a proper integer value
+-----
+
+If "Value" is a valid integer, function does nothing: 
+
+>>> bg.integer_validator("name", 5)
+
+
+-----
+If "Value" is not an integer, it raise an TypeError:
+
+>>> bg.integer_validator("Invalid Value", "Not a integer")
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+>>> bg.integer_validator("Invalid Value", 1.0)
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+>>> bg.integer_validator("Invalid Value", True)
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+>>> bg.integer_validator("Invalid Value", (1, ))
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+>>> bg.integer_validator("Invalid Value", [10])
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+>>> bg.integer_validator("Invalid Value", {1, 7})
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+>>> bg.integer_validator("Invalid Value", None)
+Traceback (most recent call last):
+TypeError: Invalid Value must be an integer
+
+-----
+If "Value" is less or equals to 0, it raise an ValueError:
+
+>>> bg.integer_validator("Invalid Value", -100)
+Traceback (most recent call last):
+ValueError: Invalid Value must be greater than 0
+
+>>> bg.integer_validator("Invalid Value", 0)
+Traceback (most recent call last):
+ValueError: Invalid Value must be greater than 0
+
+-----
+Also, Both parameters must be provided, otherwise and TypeError is raised:
+
+>>> bg.integer_validator("hi")
+Traceback (most recent call last):
+TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+>>> bg.integer_validator()
+Traceback (most recent call last):
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
