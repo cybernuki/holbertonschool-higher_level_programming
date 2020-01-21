@@ -9,6 +9,7 @@ Rectangle = __import__('9-rectangle').Rectangle
 
 class Square(Rectangle):
     """A Class that represents a Square"""
+
     def __init__(self, size):
         """Constructor method
         Args:
@@ -20,4 +21,3 @@ class Square(Rectangle):
         super().integer_validator("size", size)
         self.__size = size
         super().__init__(size, size)
-
