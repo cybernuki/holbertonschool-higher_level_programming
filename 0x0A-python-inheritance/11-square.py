@@ -14,8 +14,9 @@ class Square(Rectangle):
         Args:
             size (int): is the sizes of the square
         """
-        super().__init__(size, size)
+        super().integer_validator("size", size)
         self.__size = size
+        super().__init__(size, size)
 
     def __str__(self):
         """Returns a informal representation of Square Class"""
