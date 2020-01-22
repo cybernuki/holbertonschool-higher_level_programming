@@ -18,12 +18,12 @@ class Student():
         contained in this list are retrieved.
         Otherwise, all attributes are retrieved.
         """
-        if type(attrs) is list and\
-            all(type(val) == str for val in attrs):
-            return {k: getattr(self,k) for k in attrs if hasattr(self, k)}
+        if type(attrs) is list and all(type(val) == str for val in attrs):
+            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
         return self.__dict__
 
     def reload_from_json(self, json):
-        """Replaces all atributes of the Student instance using a json dictionary"""
+        """Replaces all atributes of the Student instance using a
+        json dictionary"""
         for k, v in json.items():
             setattr(self, k, v)

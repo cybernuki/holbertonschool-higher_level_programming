@@ -18,7 +18,6 @@ class Student():
         contained in this list are retrieved.
         Otherwise, all attributes are retrieved.
         """
-        if type(attrs) is list and\
-            all(type(val) == str for val in attrs):
-            return {k: getattr(self,k) for k in attrs if hasattr(self, k)}
+        if type(attrs) is list and all(type(val) == str for val in attrs):
+            return {k: getattr(self, k) for k in attrs if hasattr(self, k)}
         return self.__dict__

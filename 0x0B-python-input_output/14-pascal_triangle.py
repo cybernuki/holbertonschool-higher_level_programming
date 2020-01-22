@@ -2,6 +2,7 @@
 """This module defines a function that calculates
 The pascal's triangle"""
 
+
 def pascal_triangle(n):
     """Returns a matrix with the nth level of the
     pascal's triangle"""
@@ -13,9 +14,9 @@ def pascal_triangle(n):
     matrix = [[1]]
     if n == 1:
         return matrix
-    for i in range (1, n):
+    for i in range(1, n):
         matrix.append([])
-        prev, next = -1 , 0
+        prev, next = -1, 0
         while next <= i:
             if prev == -1 or next == i:
                 matrix[i].append(1)
