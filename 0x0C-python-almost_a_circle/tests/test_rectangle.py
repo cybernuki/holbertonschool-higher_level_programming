@@ -78,12 +78,12 @@ class TestRectangle_Instantiation(unittest.TestCase):
 
     def test_setter_attributes(self):
         r = Rectangle(10, 20)
-        r.width = 0
+        r.width = 10
         r.height = 200
         r.x = 400
         r.y = 200
 
-        self.assertEqual(r.width, 0)
+        self.assertEqual(r.width, 10)
         self.assertEqual(r.height, 200)
         self.assertEqual(r.x, 400)
         self.assertEqual(r.y, 200)
@@ -174,12 +174,12 @@ class TestRectangle_Width_Validation(unittest.TestCase):
 
     def test_value_validation_negative(self):
         """width is a negative number"""
-        with self.assertRaisesRegex(TypeError, "width must be > 0"):
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Rectangle(-10, 10)
 
     def test_value_validation_zero(self):
         """width is a zero"""
-        with self.assertRaisesRegex(TypeError, "width must be > 0"):
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Rectangle(0, 10)
 
 class TestRectangle_height_Validation(unittest.TestCase):
@@ -228,12 +228,12 @@ class TestRectangle_height_Validation(unittest.TestCase):
 
     def test_value_validation_negative(self):
         """height is a negative number"""
-        with self.assertRaisesRegex(TypeError, "height must be > 0"):
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
             Rectangle(10, -10)
 
     def test_value_validation_zero(self):
         """height is a zero"""
-        with self.assertRaisesRegex(TypeError, "height must be > 0"):
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
             Rectangle(10, 0)
 
 class TestRectangle_x_Validation(unittest.TestCase):
@@ -282,7 +282,7 @@ class TestRectangle_x_Validation(unittest.TestCase):
 
     def test_value_validation_negative(self):
         """x is a negative number"""
-        with self.assertRaisesRegex(TypeError, "x must be >= 0"):
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             Rectangle(10, 10, -10)
 
 class TestRectangle_y_Validation(unittest.TestCase):
@@ -331,5 +331,5 @@ class TestRectangle_y_Validation(unittest.TestCase):
 
     def test_value_validation_negative(self):
         """y is a negative number"""
-        with self.assertRaisesRegex(TypeError, "y must be >= 0"):
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Rectangle(10, 10, 10, -10)
