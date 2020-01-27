@@ -16,6 +16,11 @@ class TestBase(unittest.TestCase):
         self.b4 = Base(12)
         self.b5 = Base()
 
+    @classmethod
+    def tearDownClass(self):
+        print("\t[End of test_base test cases]")
+        setattr(Base, '_Base__nb_objects', 0)
+
     def test_instantiation(self):
         """Checouts id manager and instantaion"""
         self.assertAlmostEqual(self.b1.id, 1)
