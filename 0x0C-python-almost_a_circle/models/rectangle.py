@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # Author: Jhonatan Arenas <1164@holbertonschool.com>
 # models/rectangle.py
-from models.base import Base
 """This module contains a Rectangle class that
 inherits from the Base class"""
+from models.base import Base
 
 
 class Rectangle(Base):
@@ -96,4 +96,9 @@ class Rectangle(Base):
         string = []
         for i in range(self.__height):
             string.append("#" * self.__width)
-        return "\n".join(string)
+        print("\n".join(string))
+
+    def __str__(self):
+        return "[{}] ({}) {}/{} - {}/{}".format(
+            type(self).__name__, self.id,
+            self.x, self.y, self.width, self.height)

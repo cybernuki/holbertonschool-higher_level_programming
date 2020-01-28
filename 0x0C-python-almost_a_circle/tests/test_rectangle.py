@@ -13,6 +13,8 @@ Sumary:
     Area - Verify that the result of the area method is correct ()
 """
 import unittest
+import io
+import sys
 from models.base import Base
 from models.rectangle import Rectangle
 
@@ -382,7 +384,118 @@ class TestRectangle_Area(unittest.TestCase):
 
 class TestRectangle_Display(unittest.TestCase):
     """Verify that the result of the display method is correct"""
-    pass
+
+    @classmethod
+    def setUpClass(self):
+        print("\n[Start of dislay Test cases]")
+
+    @classmethod
+    def tearDownClass(self):
+        print(" Done")
+
+    def setUp(self):
+        setattr(Rectangle, '_Base__nb_objects', 0)
+
+    @staticmethod
+    def get_stdout(obj, method):
+        """captures the printed standar output"""
+        capture = io.StringIO()
+        sys.stdout = capture
+        if method == "print":
+            print(obj)
+        else:
+            obj.display()
+        sys.stdout = sys.__stdout__
+        return capture
+
+    def test_no_padding_display(self):
+        """Verify if the rectangle displays a normal grid"""
+        r = Rectangle(3, 3, 0, 0)
+        capture = TestRectangle_Display.get_stdout(r, "display")
+        self.assertEqual("###\n###\n###\n", capture.getvalue())
+
+    def test_x_padding_display(self):
+        """Verify if the rectangle displays a normal grid with x padding"""
+        r = Rectangle(3, 3, 2, 0)
+        capture = TestRectangle_Display.get_stdout(r, "display")
+        self.assertEqual("  ###\n  ###\n  ###\n", capture.getvalue())
+
+    def test_y_padding_display(self):
+        """Verify if the rectangle displays a normal grid with y padding"""
+        r = Rectangle(3, 3, 0, 2)
+        capture = TestRectangle_Display.get_stdout(r, "display")
+        self.assertEqual("\n\n###\n###\n###\n", capture.getvalue())
+
+    def test_xy_padding_display(self):
+        """Verify if the rectangle displays a normal grid with y padding"""
+        r = Rectangle(3, 3, 2, 2)
+        capture = TestRectangle_Display.get_stdout(r, "display")
+        self.assertEqual("\n\n  ###\n  ###\n  ###\n", capture.getvalue())
+
+class TestRectangle_str(unittest.TestCase):
+    """Verify that the result of the __str__ method is correct"""
+
+    @classmethod
+    def setUpClass(self):
+        print("\n[Start of __str__ Test cases]")
+
+    @classmethod
+    def tearDownClass(self):
+        print(" Done")
+
+    def setUp(self):
+        setattr(Rectangle, '_Base__nb_objects', 0)
+
+    @staticmethod
+    def get_stdout(obj, method):
+        """captures the printed standar output"""
+        capture = io.StringIO()
+        sys.stdout = capture
+        if method == "print":
+            print(obj)
+        else:
+            obj.display()
+        sys.stdout = sys.__stdout__
+        return capture
+
+    def test_print_method(self):
+        """Test that print method use the correct __str__ format"""
+        r = Rectangle(20, 10)
+        capture = TestRectangle_str.get_stdout(r, "print")
+        expected = "[Rectangle] ({}) 0/0 - 20/10\n".format(r.id)
+        self.assertEqual(expected, capture.getvalue())
+
+    def test_str_method_height_width_x(self):
+        """Evaluates that the instance.__str__() methods returns
+        the correct output"""
+        r = Rectangle(40, 50, 10)
+        expected = "[Rectangle] ({}) 10/0 - 40/50".format(r.id)
+        self.assertEqual(expected, r.__str__())
+
+    def test_str_method_height_width_x_y(self):
+        """Evaluates that the str() methods prints
+        the correct output"""
+        r = Rectangle(100, 20, 10, 20)
+        expected = "[Rectangle] ({}) 10/20 - 100/20".format(r.id)
+        self.assertEqual(expected, str(r))
+
+    def test_str_method_height_width_x_y_id(self):
+        """Evaluates that the str() methods prints
+        the correct output"""
+        r = Rectangle(100, 20, 10, 20, 99)
+        expected = "[Rectangle] (99) 10/20 - 100/20"
+        self.assertEqual(expected, str(r))
+
+    def test_str_method_changed_attributes(self):
+        """Evaluates that the str() methods prints
+        the correct output"""
+        r = Rectangle(100, 20, 10, 20, 99)
+        r.width = 1
+        r.height = 2
+        r.x = 3
+        r.y = 4
+        expected = "[Rectangle] (99) 3/4 - 1/2"
+        self.assertEqual(expected, str(r))
 
 
 if __name__ == "__main__":
