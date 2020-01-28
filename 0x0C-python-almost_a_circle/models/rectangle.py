@@ -89,3 +89,12 @@ class Rectangle(Base):
         if y < 0:
             raise ValueError("y must be >= 0") 
         self.__y = y
+
+    def display(self):
+        """prints the rectangle"""
+        if self.__height == 0 or self.__width == 0:
+            return ""
+        string = []
+        for i in range(self.__height):
+            string.append("#" * self.__width)
+        return "\n".join(string)

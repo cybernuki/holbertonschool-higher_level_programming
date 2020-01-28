@@ -374,3 +374,6 @@ class TestRectangle_Area(unittest.TestCase):
         with self.assertRaises(TypeError):
             r = Rectangle(10, 10)
             r.area(10)
+
+class TestRectangle_Display(unittest.TestCase):
+    """Verify that the result of the display method is correct"""
