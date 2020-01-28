@@ -10,6 +10,7 @@ Sumary:
     height_Validation - verify if the attribute height validates correctly ()
     x_Validation - verify if the attribute x validates correctly ()
     y_Validation - verify if the attribute y validates correctly ()
+    Area - Verify that the result of the area method is correct ()
 """
 import unittest
 from models.base import Base
@@ -25,7 +26,7 @@ class TestRectangle_Instantiation(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        print("\tDone")
+        print(" Done")
 
     def setUp(self):
         setattr(Rectangle, '_Base__nb_objects', 0)
@@ -137,7 +138,7 @@ class TestRectangle_Width_Validation(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        print("\tDone")
+        print(" Done")
 
     def setUp(self):
         setattr(Rectangle, '_Base__nb_objects', 0)
@@ -191,7 +192,7 @@ class TestRectangle_height_Validation(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        print("\tDone")
+        print(" Done")
 
     def setUp(self):
         setattr(Rectangle, '_Base__nb_objects', 0)
@@ -245,7 +246,7 @@ class TestRectangle_x_Validation(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        print("\tDone")
+        print(" Done")
 
     def setUp(self):
         setattr(Rectangle, '_Base__nb_objects', 0)
@@ -333,3 +334,43 @@ class TestRectangle_y_Validation(unittest.TestCase):
         """y is a negative number"""
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Rectangle(10, 10, 10, -10)
+
+class TestRectangle_Area(unittest.TestCase):
+    """Verify that the result of the area method is correct"""
+
+    @classmethod
+    def setUpClass(self):
+        print("\n[Start of area Test cases]")
+
+    @classmethod
+    def tearDownClass(self):
+        print(" Done")
+
+    def setUp(self):
+        setattr(Rectangle, '_Base__nb_objects', 0)
+    
+    def test_correct_output(self):
+        """Verify if the out put of the area method is correct"""
+        r = Rectangle(10, 10)
+        self.assertEqual(r.area(), 100)
+        r = Rectangle(980000, 200000)
+        self.assertEqual(r.area(), 196000000000)
+        r = Rectangle(9821738912, 891273891)
+        self.assertEqual(r.area(), 8753859456484346592)
+
+    def test_output_after_changes(self):
+        """Verify if the out put of the area method is correct
+        after change the attributes
+        """
+        r = Rectangle(9821738912, 891273891)
+        self.assertEqual(r.area(), 8753859456484346592)
+        r.width = 10
+        self.assertEqual(r.area(), 8912738910)
+        r.height = 10
+        self.assertEqual(r.area(), 100)                
+
+    def test_arguments(self):
+        """Verify if the method raise a error when try to pass arguments"""
+        with self.assertRaises(TypeError):
+            r = Rectangle(10, 10)
+            r.area(10)
