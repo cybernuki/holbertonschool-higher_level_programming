@@ -93,10 +93,10 @@ class Rectangle(Base):
         """prints the rectangle"""
         if self.__height == 0 or self.__width == 0:
             return ""
-        string = []
-        for i in range(self.__height):
-            string.append("#" * self.__width)
-        print("\n".join(string))
+        print("\n" * self.y, end="")
+        for i in range(self.width):
+            print(" " * self.x, end="")
+            print("#" * self.height)
 
     def __str__(self):
         return "[{}] ({}) {}/{} - {}/{}".format(

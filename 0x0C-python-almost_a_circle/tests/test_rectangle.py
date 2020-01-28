@@ -410,7 +410,7 @@ class TestRectangle_Display(unittest.TestCase):
 
     def test_no_padding_display(self):
         """Verify if the rectangle displays a normal grid"""
-        r = Rectangle(3, 3, 0, 0)
+        r = Rectangle(3, 3)
         capture = TestRectangle_Display.get_stdout(r, "display")
         self.assertEqual("###\n###\n###\n", capture.getvalue())
 
@@ -431,6 +431,7 @@ class TestRectangle_Display(unittest.TestCase):
         r = Rectangle(3, 3, 2, 2)
         capture = TestRectangle_Display.get_stdout(r, "display")
         self.assertEqual("\n\n  ###\n  ###\n  ###\n", capture.getvalue())
+
 
 class TestRectangle_str(unittest.TestCase):
     """Verify that the result of the __str__ method is correct"""
