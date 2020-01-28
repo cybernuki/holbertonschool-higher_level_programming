@@ -37,3 +37,7 @@ class TestBase(unittest.TestCase):
         self.assertIsInstance(self.b3, Base)
         self.assertIsInstance(self.b4, Base)
         self.assertIsInstance(self.b5, Base)
+
+
+if __name__ == "__main__":
+    unittest.main()

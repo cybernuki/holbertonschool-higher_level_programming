@@ -382,3 +382,8 @@ class TestRectangle_Area(unittest.TestCase):
 
 class TestRectangle_Display(unittest.TestCase):
     """Verify that the result of the display method is correct"""
+    pass
+
+
+if __name__ == "__main__":
+    unittest.main()
