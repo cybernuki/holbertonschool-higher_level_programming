@@ -95,9 +95,9 @@ class Rectangle(Base):
         if self.__height == 0 or self.__width == 0:
             return ""
         print("\n" * self.y, end="")
-        for i in range(self.width):
+        for i in range(self.height):
             print(" " * self.x, end="")
-            print("#" * self.height)
+            print("#" * self.width)
 
     def __str__(self):
         """Returns an string representation of a Rectangle"""
