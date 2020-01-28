@@ -31,6 +31,7 @@ class Rectangle(Base):
         self.y = y
 
     def area(self):
+        """Returns the area of the Rectangle"""
         return self.__width * self.__height
 
     @property
@@ -99,6 +100,7 @@ class Rectangle(Base):
             print("#" * self.height)
 
     def __str__(self):
+        """Returns an string representation of a Rectangle"""
         return "[{}] ({}) {}/{} - {}/{}".format(
             type(self).__name__, self.id,
             self.x, self.y, self.width, self.height)
