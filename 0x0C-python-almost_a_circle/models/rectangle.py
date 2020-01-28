@@ -11,7 +11,6 @@ class Rectangle(Base):
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """Constructor method
-        
         Args:
             width (int): is the width of the rectangle
             height (int): is the height of the rectangle
@@ -23,7 +22,7 @@ class Rectangle(Base):
                 if width or height are less or equals to cero
                 if x or y are less than cero
             TypeError:
-                if width, height, x, y or id is not int 
+                if width, height, x, y or id is not int
         """
         super().__init__(id)
         self.width = width
@@ -59,7 +58,7 @@ class Rectangle(Base):
         if type(height) is not int:
             raise TypeError("height must be an integer")
         if height <= 0:
-            raise ValueError("height must be > 0")        
+            raise ValueError("height must be > 0")
         self.__height = height
 
     @property
@@ -73,7 +72,7 @@ class Rectangle(Base):
         if type(x) is not int:
             raise TypeError("x must be an integer")
         if x < 0:
-            raise ValueError("x must be >= 0") 
+            raise ValueError("x must be >= 0")
         self.__x = x
 
     @property
@@ -87,7 +86,7 @@ class Rectangle(Base):
         if type(y) is not int:
             raise TypeError("y must be an integer")
         if y < 0:
-            raise ValueError("y must be >= 0") 
+            raise ValueError("y must be >= 0")
         self.__y = y
 
     def display(self):

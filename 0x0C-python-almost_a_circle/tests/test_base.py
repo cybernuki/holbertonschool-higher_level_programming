@@ -15,6 +15,7 @@ class TestBase(unittest.TestCase):
         self.b3 = Base()
         self.b4 = Base(12)
         self.b5 = Base()
+
     @classmethod
     def setUpClass(self):
         print("[Start of Base Test cases]")
@@ -36,4 +37,3 @@ class TestBase(unittest.TestCase):
         self.assertIsInstance(self.b3, Base)
         self.assertIsInstance(self.b4, Base)
         self.assertIsInstance(self.b5, Base)
-

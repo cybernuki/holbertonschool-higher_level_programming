@@ -3,7 +3,7 @@
 # tests/test_rectangle.py
 """This module contains a test case class for Rectangle class
 
-Sumary: 
+Sumary:
 
     Instantiation - verify if every in instantiation is correct ()
     Width_Validation - verify if the attribute width validates correctly ()
@@ -58,7 +58,7 @@ class TestRectangle_Instantiation(unittest.TestCase):
         self.assertEqual(getattr(Rectangle, '_Base__nb_objects'), 49)
         # Now, we create 5 instances more, which has i variable as id
         for i in range(0, 10, 2):
-            r =  Rectangle(10, 10, 10, 10, i)
+            r = Rectangle(10, 10, 10, 10, i)
             self.assertEqual(r.id, i)
         # Finally, as we pass an id into the arguments, if we create a
         # new rectangle, it must has the id of 50
@@ -67,7 +67,7 @@ class TestRectangle_Instantiation(unittest.TestCase):
 
     def test_private_attributes(self):
         """Verify if the width, height, x and y attributes are private"""
-        r = Rectangle(1,1)
+        r = Rectangle(1, 1)
         with self.assertRaises(AttributeError):
             r.__width
         with self.assertRaises(AttributeError):
@@ -171,7 +171,7 @@ class TestRectangle_Width_Validation(unittest.TestCase):
     def test_type_validation_object(self):
         """width is any object"""
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            Rectangle(object, 10)       
+            Rectangle(object, 10)
 
     def test_value_validation_negative(self):
         """width is a negative number"""
@@ -182,6 +182,7 @@ class TestRectangle_Width_Validation(unittest.TestCase):
         """width is a zero"""
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Rectangle(0, 10)
+
 
 class TestRectangle_height_Validation(unittest.TestCase):
     """Test cases that verify if the attribute width validates correctly"""
@@ -220,12 +221,12 @@ class TestRectangle_height_Validation(unittest.TestCase):
     def test_type_validation_Nan(self):
         """height is none"""
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(10,float('nan'))
+            Rectangle(10, float('nan'))
 
     def test_type_validation_object(self):
         """height is any object"""
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            Rectangle(10, object)       
+            Rectangle(10, object)
 
     def test_value_validation_negative(self):
         """height is a negative number"""
@@ -236,6 +237,7 @@ class TestRectangle_height_Validation(unittest.TestCase):
         """height is a zero"""
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             Rectangle(10, 0)
+
 
 class TestRectangle_x_Validation(unittest.TestCase):
     """Test cases that verify if the attribute x validates correctly"""
@@ -254,7 +256,7 @@ class TestRectangle_x_Validation(unittest.TestCase):
     def test_type_validation_str(self):
         """x is a string"""
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(10, 10,"Hello")
+            Rectangle(10, 10, "Hello")
 
     def test_type_validation_double(self):
         """x is a double"""
@@ -264,7 +266,7 @@ class TestRectangle_x_Validation(unittest.TestCase):
     def test_type_validation_bool(self):
         """x is bool"""
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(10, 20,True)
+            Rectangle(10, 20, True)
 
     def test_type_validation_None(self):
         """x is none"""
@@ -279,12 +281,13 @@ class TestRectangle_x_Validation(unittest.TestCase):
     def test_type_validation_object(self):
         """x is any object"""
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            Rectangle(10, 10, object)       
+            Rectangle(10, 10, object)
 
     def test_value_validation_negative(self):
         """x is a negative number"""
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             Rectangle(10, 10, -10)
+
 
 class TestRectangle_y_Validation(unittest.TestCase):
     """Test cases that verify if the attribute y validates correctly"""
@@ -328,12 +331,13 @@ class TestRectangle_y_Validation(unittest.TestCase):
     def test_type_validation_object(self):
         """y is any object"""
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            Rectangle(10, 10, 10, object)       
+            Rectangle(10, 10, 10, object)
 
     def test_value_validation_negative(self):
         """y is a negative number"""
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
             Rectangle(10, 10, 10, -10)
+
 
 class TestRectangle_Area(unittest.TestCase):
     """Verify that the result of the area method is correct"""
@@ -348,7 +352,7 @@ class TestRectangle_Area(unittest.TestCase):
 
     def setUp(self):
         setattr(Rectangle, '_Base__nb_objects', 0)
-    
+
     def test_correct_output(self):
         """Verify if the out put of the area method is correct"""
         r = Rectangle(10, 10)
@@ -367,13 +371,14 @@ class TestRectangle_Area(unittest.TestCase):
         r.width = 10
         self.assertEqual(r.area(), 8912738910)
         r.height = 10
-        self.assertEqual(r.area(), 100)                
+        self.assertEqual(r.area(), 100)
 
     def test_arguments(self):
         """Verify if the method raise a error when try to pass arguments"""
         with self.assertRaises(TypeError):
             r = Rectangle(10, 10)
             r.area(10)
+
 
 class TestRectangle_Display(unittest.TestCase):
     """Verify that the result of the display method is correct"""
