@@ -499,45 +499,37 @@ class TestRectangle_update(unittest.TestCase):
         """Verify if args update is working two args"""
         sq = Square(33, 33, 33)
         sq.update(10, 20, 30)
-        self.assertEqual("[Square] (10) 33/33 - 20", str(sq))
+        self.assertEqual("[Square] (10) 30/33 - 20", str(sq))
 
     def test_args_four_args(self):
         """Verify if args update is working two args"""
         sq = Square(33, 33, 33)
         sq.update(10, 20, 30, 40)
-        self.assertEqual("[Square] (10) 40/33 - 20", str(sq))
+        self.assertEqual("[Square] (10) 30/40 - 20", str(sq))
 
     def test_args_five_args(self):
         """Verify if args update is working two args"""
         sq = Square(33, 33, 33)
         sq.update(10, 20, 30, 40, 50)
-        self.assertEqual("[Square] (10) 40/50 - 20", str(sq))
-
-    def test_args_five_more_args(self):
-        """Verify if args update is working two args"""
-        sq = Square(33, 33, 33)
-        sq.update(10, 20, 30, 40, 50, 100)
-        self.assertEqual("[Square] (10) 40/50 - 20", str(sq))
+        self.assertEqual("[Square] (10) 30/40 - 20", str(sq))
 
     def test_args_twice_operation(self):
         """Verify if update changes whit a double call"""
         sq = Square(33, 33, 33)
-        sq.update(10, 20, 30, 40, 50)
-        self.assertEqual("[Square] (10) 40/50 - 20", str(sq))
-        sq.update(89, 102, 103, 104, 107)
-        self.assertEqual("[Square] (89) 104/107 - 102", str(sq))
+        sq.update(10, 20, 30, 40)
+        self.assertEqual("[Square] (10) 30/40 - 20", str(sq))
+        sq.update(89, 102, 103, 104)
+        self.assertEqual("[Square] (89) 103/104 - 102", str(sq))
 
     def test_args_wrong_type_values(self):
         """Verify if update changes whit a double call"""
         sq = Square(33, 33, 33)
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             sq.update(10, "20")
-        with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            sq.update(10, 20, "30")
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
-            sq.update(10, 20, 30, "40")
+            sq.update(10, 20, "40")
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            sq.update(10, 20, 30, 40, "50")
+            sq.update(10, 20, 40, "50")
 
     def test_args_wrong_values(self):
         """Verify if update changes whit a double call"""
@@ -546,17 +538,13 @@ class TestRectangle_update(unittest.TestCase):
             sq.update(10, 0)
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             sq.update(10, -10)
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            sq.update(10, 20, 0)
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            sq.update(10, 20, -10)
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
-            sq.update(10, 20, 30, -10)
-        sq.update(10, 20, 30, 0)
+            sq.update(10, 20, -10)
+        sq.update(10, 20, 0)
         self.assertEqual("[Square] (10) 0/33 - 20", str(sq))
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
-            sq.update(10, 20, 30, 10, -10)
-        sq.update(10, 20, 30, 0, 0)
+            sq.update(10, 20, 30, -10)
+        sq.update(10, 20, 0, 0)
         self.assertEqual("[Square] (10) 0/0 - 20", str(sq))
 
     def test_kwargs_one_args(self):
@@ -569,41 +557,45 @@ class TestRectangle_update(unittest.TestCase):
         """Verify if kwargs update is working with two args"""
         sq = Square(33, 33, 33)
         sq.update(id=1, width=2)
-        self.assertEqual("[Square] (1) 33/33 - 2", str(sq))
+        self.assertEqual("[Square] (1) 33/33 - 33", str(sq))
 
     def test_kwargs_three_args(self):
         """Verify if kwargs update is working with three args"""
         sq = Square(33, 33, 33)
         sq.update(id=1, width=2, height=3)
-        self.assertEqual("[Square] (1) 33/33 - 2", str(sq))
+        self.assertEqual("[Square] (1) 33/33 - 33", str(sq))
+
+    def test_kwargs_size_args(self):
+        """Verify if kwargs update is working with size args"""
+        sq = Square(33, 33, 33)
+        sq.update(id=1, width=2, height=3, size=100)
+        self.assertEqual("[Square] (1) 33/33 - 100", str(sq))
 
     def test_kwargs_four_args(self):
         """Verify if kwargs update is working with four args"""
         sq = Square(33, 33, 33)
-        sq.update(id=1, width=2, height=3, x=4)
-        self.assertEqual("[Square] (1) 4/33 - 2", str(sq))
+        sq.update(id=1, width=2, height=3, size=100, x=4)
+        self.assertEqual("[Square] (1) 4/33 - 100", str(sq))
 
     def test_kwargs_five_args(self):
         """Verify if kwargs update is working with five args"""
         sq = Square(33, 33, 33)
-        sq.update(id=1, width=2, height=3, x=4, y=5)
-        self.assertEqual("[Square] (1) 4/5 - 2", str(sq))
+        sq.update(id=1, width=2, height=3, x=4, y=5, size=100)
+        self.assertEqual("[Square] (1) 4/5 - 100", str(sq))
 
     def test_id_None(self):
         """Verify if kwargs update has id as None"""
         sq = Square(33, 33, 33)
         sq.update(id=None)
         self.assertEqual("[Square] ({}) 33/33 - 33".format(sq.id), str(sq))
-        sq.update(id=None, width=2, height=3, x=4, y=5)
-        self.assertEqual("[Square] ({}) 4/5 - 2".format(sq.id), str(sq))
+        sq.update(id=None, width=2, height=3, x=4, y=5, size=100)
+        self.assertEqual("[Square] ({}) 4/5 - 100".format(sq.id), str(sq))
 
     def test_invalid_type(self):
         """Verify if kwargs update has invalid type values"""
         sq = Square(33, 33, 33)
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
-            sq.update(width=None)
-        with self.assertRaisesRegex(TypeError, "height must be an integer"):
-            sq.update(height=None)
+            sq.update(size=None)
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             sq.update(x=None)
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
@@ -613,13 +605,9 @@ class TestRectangle_update(unittest.TestCase):
         """Verify if kwargs update has invalid values"""
         sq = Square(33, 33, 33)
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
-            sq.update(width=0)
+            sq.update(size=0)
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
-            sq.update(width=-10)
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            sq.update(height=0)
-        with self.assertRaisesRegex(ValueError, "height must be > 0"):
-            sq.update(height=-10)
+            sq.update(size=-10)
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             sq.update(x=-10)
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
@@ -628,7 +616,7 @@ class TestRectangle_update(unittest.TestCase):
     def test_kwargs_args(self):
         """Verify if kwargs update is working with five args and kwargs"""
         sq = Square(33, 33, 33)
-        sq.update(89, 10, height=3, x=4, y=5)
+        sq.update(89, 10, size=3, x=4, y=5)
         self.assertEqual("[Square] (89) 33/33 - 10", str(sq))
 
     def test_wrong_key(self):
@@ -636,5 +624,5 @@ class TestRectangle_update(unittest.TestCase):
         sq = Square(33, 33, 33)
         sq.update(a=3, b=4, c=5)
         self.assertEqual("[Square] ({}) 33/33 - 33".format(sq.id), str(sq))
-        sq.update(width=3, height=4, c=5)
+        sq.update(size=3, c=5)
         self.assertEqual("[Square] ({}) 33/33 - 3".format(sq.id), str(sq))
