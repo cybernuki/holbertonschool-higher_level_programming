@@ -22,7 +22,7 @@ class TestBase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        print("\Done")
+        print("Done")
 
     def test_instantiation(self):
         """Checouts id manager and instantaion"""
