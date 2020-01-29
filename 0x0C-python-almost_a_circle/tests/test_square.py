@@ -626,3 +626,34 @@ class TestRectangle_update(unittest.TestCase):
         self.assertEqual("[Square] ({}) 33/33 - 33".format(sq.id), str(sq))
         sq.update(size=3, c=5)
         self.assertEqual("[Square] ({}) 33/33 - 3".format(sq.id), str(sq))
+
+
+class TestRectangle_dict(unittest.TestCase):
+    """Verify that the result of the to_dict method is correct"""
+
+    @classmethod
+    def setUpClass(self):
+        print("\n[Start of to_dict Test cases]")
+
+    @classmethod
+    def tearDownClass(self):
+        print(" Done")
+
+    def setUp(self):
+        setattr(Square, '_Base__nb_objects', 0)
+
+    def test_to_dictionary_output(self):
+        sq = Square(10, 2, 9, 5)
+        correct = {'x': 2, 'y': 9, 'id': 5, 'size': 10}
+        self.assertDictEqual(correct, sq.to_dictionary())
+
+    def test_to_dictionary_no_object_changes(self):
+        sq1 = Square(10, 2, 9, 5)
+        sq2 = Square(5, 9, 1, 10)
+        sq2.update(**sq1.to_dictionary())
+        self.assertNotEqual(sq1, sq2)
+
+    def test_to_dictionary_arg(self):
+        sq = Square(10, 2, 1, 2)
+        with self.assertRaises(TypeError):
+            sq.to_dictionary(1)
