@@ -33,4 +33,4 @@ class Base:
                 jsonfile.write("[]")
             else:
                 list_dict = [o.to_dictionary() for o in list_objs]
-                jsonfile.write(Base.to_json_string(list_dict)
+                jsonfile.write(Base.to_json_string(list_dict))
