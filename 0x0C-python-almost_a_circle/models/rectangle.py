@@ -105,9 +105,9 @@ class Rectangle(Base):
             type(self).__name__, self.id,
             self.x, self.y, self.width, self.height)
 
-    def update(self, *argv):
+    def update(self, *argv, **kwargs):
         """Updates the values of the class"""
-        if len(argv) > 0:
+        if argv and len(argv) > 0:
             for counter, arg in enumerate(argv, 0):
                 if counter == len(argv):
                     break
@@ -121,3 +121,15 @@ class Rectangle(Base):
                     self.x = arg
                 elif counter == 4:
                     self.y = arg
+        elif kwargs and len(kwargs) > 0:
+            for k, v in kwargs.items():
+                if k == "id" and v is not None:
+                    self.id = v
+                elif k == "width":
+                    self.width = v
+                elif k == "height":
+                    self.height = v
+                elif k == "x":
+                    self.x = v
+                elif k == "y":
+                    self.y = v

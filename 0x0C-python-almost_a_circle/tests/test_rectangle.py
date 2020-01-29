@@ -573,7 +573,7 @@ class TestRectangle_update(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             r.update(10, 20, 30, "40")
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
-            r.update(10, 20, 30, 40, "50")   
+            r.update(10, 20, 30, 40, "50")
 
     def test_args_wrong_values(self):
         """Verify if update changes whit a double call"""
@@ -594,6 +594,86 @@ class TestRectangle_update(unittest.TestCase):
             r.update(10, 20, 30, 10, -10)
         r.update(10, 20, 30, 0, 0)
         self.assertEqual("[Rectangle] (10) 0/0 - 20/30", str(r))
+
+    def test_kwargs_one_args(self):
+        """Verify if kwargs update is working with zero args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(id=1)
+        self.assertEqual("[Rectangle] (1) 33/33 - 33/33", str(r))
+
+    def test_kwargs_two_args(self):
+        """Verify if kwargs update is working with two args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(id=1, width=2)
+        self.assertEqual("[Rectangle] (1) 33/33 - 2/33", str(r))
+
+    def test_kwargs_three_args(self):
+        """Verify if kwargs update is working with three args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(id=1, width=2, height=3)
+        self.assertEqual("[Rectangle] (1) 33/33 - 2/3", str(r))
+
+    def test_kwargs_four_args(self):
+        """Verify if kwargs update is working with four args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(id=1, width=2, height=3, x=4)
+        self.assertEqual("[Rectangle] (1) 4/33 - 2/3", str(r))
+
+    def test_kwargs_five_args(self):
+        """Verify if kwargs update is working with five args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(id=1, width=2, height=3, x=4, y=5)
+        self.assertEqual("[Rectangle] (1) 4/5 - 2/3", str(r))
+
+    def test_id_None(self):
+        """Verify if kwargs update has id as None"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(id=None)
+        self.assertEqual("[Rectangle] ({}) 33/33 - 33/33".format(r.id), str(r))
+        r.update(id=None, width=2, height=3, x=4, y=5)
+        self.assertEqual("[Rectangle] ({}) 4/5 - 2/3".format(r.id), str(r))
+
+    def test_invalid_type(self):
+        """Verify if kwargs update has invalid type values"""
+        r = Rectangle(33, 33, 33, 33)
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            r.update(width=None)
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            r.update(height=None)
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            r.update(x=None)
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            r.update(y=None)
+
+    def test_invalid_value(self):
+        """Verify if kwargs update has invalid values"""
+        r = Rectangle(33, 33, 33, 33)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r.update(width=0)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r.update(width=-10)
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r.update(height=0)
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r.update(height=-10)
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            r.update(x=-10)
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            r.update(y=-10)
+
+    def test_kwargs_args(self):
+        """Verify if kwargs update is working with five args and kwargs"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(89, 10, height=3, x=4, y=5)
+        self.assertEqual("[Rectangle] (89) 33/33 - 10/33", str(r))
+
+    def test_wrong_key(self):
+        """Verify if kwargs update is working with five args and kwargs"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(a=3, b=4, c=5)
+        self.assertEqual("[Rectangle] ({}) 33/33 - 33/33".format(r.id), str(r))
+        r.update(width=3, height=4, c=5)
+        self.assertEqual("[Rectangle] ({}) 33/33 - 3/4".format(r.id), str(r))
 
 
 if __name__ == "__main__":
