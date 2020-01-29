@@ -97,6 +97,7 @@ class TestBase_to_Json(unittest.TestCase):
         with self.assertRaises(TypeError):
             Base.to_json_string([], 1)
 
+
 class TestBase_from_Json_string(unittest.TestCase):
     """Test class for Base class"""
 
@@ -107,6 +108,7 @@ class TestBase_from_Json_string(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         print("[Start of Base Test cases]")
+
     def test_from_json_string_type(self):
         list_input = [{"id": 89, "width": 10, "height": 4}]
         json_list_input = Rectangle.to_json_string(list_input)
@@ -156,6 +158,7 @@ class TestBase_from_Json_string(unittest.TestCase):
     def test_from_json_string_more_than_one_arg(self):
         with self.assertRaises(TypeError):
             Base.from_json_string([], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
