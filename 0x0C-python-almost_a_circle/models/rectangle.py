@@ -104,3 +104,20 @@ class Rectangle(Base):
         return "[{}] ({}) {}/{} - {}/{}".format(
             type(self).__name__, self.id,
             self.x, self.y, self.width, self.height)
+
+    def update(self, *argv):
+        """Updates the values of the class"""
+        if len(argv) > 0:
+            for counter, arg in enumerate(argv, 0):
+                if counter == len(argv):
+                    break
+                if counter == 0 and arg is not None:
+                    self.id = arg
+                elif counter == 1:
+                    self.width = arg
+                elif counter == 2:
+                    self.height = arg
+                elif counter == 3:
+                    self.x = arg
+                elif counter == 4:
+                    self.y = arg

@@ -499,5 +499,102 @@ class TestRectangle_str(unittest.TestCase):
         self.assertEqual(expected, str(r))
 
 
+class TestRectangle_update(unittest.TestCase):
+    """Verify that the result of the update method is correct"""
+
+    @classmethod
+    def setUpClass(self):
+        print("\n[Start of update Test cases]")
+
+    @classmethod
+    def tearDownClass(self):
+        print(" Done")
+
+    def setUp(self):
+        setattr(Rectangle, '_Base__nb_objects', 0)
+
+    def test_args_zero_args(self):
+        """Verify if args update is working with zero args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update()
+        self.assertEqual("[Rectangle] ({}) 33/33 - 33/33".format(r.id), str(r))
+
+    def test_args_one_args(self):
+        """Verify if args update is working one args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10)
+        self.assertEqual("[Rectangle] (10) 33/33 - 33/33", str(r))
+
+    def test_args_two_args(self):
+        """Verify if args update is working one args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10, 20)
+        self.assertEqual("[Rectangle] (10) 33/33 - 20/33", str(r))
+
+    def test_args_three_args(self):
+        """Verify if args update is working two args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10, 20, 30)
+        self.assertEqual("[Rectangle] (10) 33/33 - 20/30", str(r))
+
+    def test_args_four_args(self):
+        """Verify if args update is working two args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10, 20, 30, 40)
+        self.assertEqual("[Rectangle] (10) 40/33 - 20/30", str(r))
+
+    def test_args_five_args(self):
+        """Verify if args update is working two args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10, 20, 30, 40, 50)
+        self.assertEqual("[Rectangle] (10) 40/50 - 20/30", str(r))
+
+    def test_args_five_more_args(self):
+        """Verify if args update is working two args"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10, 20, 30, 40, 50, 100)
+        self.assertEqual("[Rectangle] (10) 40/50 - 20/30", str(r))
+
+    def test_args_twice_operation(self):
+        """Verify if update changes whit a double call"""
+        r = Rectangle(33, 33, 33, 33)
+        r.update(10, 20, 30, 40, 50)
+        self.assertEqual("[Rectangle] (10) 40/50 - 20/30", str(r))
+        r.update(89, 102, 103, 104, 107)
+        self.assertEqual("[Rectangle] (89) 104/107 - 102/103", str(r))
+
+    def test_args_wrong_type_values(self):
+        """Verify if update changes whit a double call"""
+        r = Rectangle(33, 33, 33, 33)
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            r.update(10, "20")
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            r.update(10, 20, "30")
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            r.update(10, 20, 30, "40")
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            r.update(10, 20, 30, 40, "50")   
+
+    def test_args_wrong_values(self):
+        """Verify if update changes whit a double call"""
+        r = Rectangle(33, 33, 33, 33)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r.update(10, 0)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            r.update(10, -10)
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r.update(10, 20, 0)
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            r.update(10, 20, -10)
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            r.update(10, 20, 30, -10)
+        r.update(10, 20, 30, 0)
+        self.assertEqual("[Rectangle] (10) 0/33 - 20/30", str(r))
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            r.update(10, 20, 30, 10, -10)
+        r.update(10, 20, 30, 0, 0)
+        self.assertEqual("[Rectangle] (10) 0/0 - 20/30", str(r))
+
+
 if __name__ == "__main__":
     unittest.main()
