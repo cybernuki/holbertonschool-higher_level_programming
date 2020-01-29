@@ -27,7 +27,6 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         """write a JSON file to serializate an object"""
-
         file_name = cls.__name__ + ".json"
         with open(file_name, "w") as jsonfile:
             if list_objs is None:
