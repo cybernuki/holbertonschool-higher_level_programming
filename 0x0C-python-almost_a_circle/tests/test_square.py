@@ -92,40 +92,65 @@ class TestRectangle_Instantiation(unittest.TestCase):
         self.assertEqual(sq.x, 400)
         self.assertEqual(sq.y, 200)
 
+        sq.size = 10
+        self.assertAlmostEqual(sq.size, sq.width)
+        self.assertAlmostEqual(sq.size, sq.height)
+
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            sq.size = 0
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            sq.size = -10
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            sq.size = "hola"
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            sq.size = 1.5
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            sq.size = True
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            sq.size = None
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            sq.size = object
+
     def test_getters_attributes(self):
         """Verify if the getter methods works propertly"""
         sq = Square(20)
         self.assertAlmostEqual(sq.width, 20)
-        self.assertAlmostEqual(sq.height, sq.width)
+        self.assertAlmostEqual(sq.size, sq.width)
+        self.assertAlmostEqual(sq.size, sq.height)
         self.assertAlmostEqual(sq.x, 0)
         self.assertAlmostEqual(sq.y, 0)
 
         sq = Square(20, 1, 2)
         self.assertAlmostEqual(sq.width, 20)
-        self.assertAlmostEqual(sq.height, sq.width)
+        self.assertAlmostEqual(sq.size, sq.width)
+        self.assertAlmostEqual(sq.size, sq.height)
         self.assertAlmostEqual(sq.x, 1)
         self.assertAlmostEqual(sq.y, 2)
 
         sq = Square(20, 2, 3)
         self.assertAlmostEqual(sq.width, 20)
-        self.assertAlmostEqual(sq.height, sq.width)
+        self.assertAlmostEqual(sq.size, sq.width)
+        self.assertAlmostEqual(sq.size, sq.height)
         self.assertAlmostEqual(sq.x, 2)
         self.assertAlmostEqual(sq.y, 3)
 
         sq = Square(20, 1, 2, 15)
         self.assertAlmostEqual(sq.width, 20)
-        self.assertAlmostEqual(sq.height, sq.width)
+        self.assertAlmostEqual(sq.size, sq.width)
+        self.assertAlmostEqual(sq.size, sq.height)
         self.assertAlmostEqual(sq.x, 1)
         self.assertAlmostEqual(sq.y, 2)
 
         sq = Square(20, 2, 3, 0)
         self.assertAlmostEqual(sq.width, 20)
-        self.assertAlmostEqual(sq.height, sq.width)
+        self.assertAlmostEqual(sq.size, sq.width)
+        self.assertAlmostEqual(sq.size, sq.height)
         self.assertAlmostEqual(sq.x, 2)
         self.assertAlmostEqual(sq.y, 3)
+        
 
 
-class TestRectangle_height_Validation(unittest.TestCase):
+class TestRectangle_size_Validation(unittest.TestCase):
     """Test cases that verify if the parameter size  is correctly validated"""
 
     @classmethod
@@ -178,6 +203,7 @@ class TestRectangle_height_Validation(unittest.TestCase):
         """Size is a zero"""
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             Square(0)
+
 
 class TestRectangle_x_Validation(unittest.TestCase):
     """Test cases that verify if the attribute x validates correctly"""
