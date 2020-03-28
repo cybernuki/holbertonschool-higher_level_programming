@@ -1,0 +1,1 @@
+In this project I used python to connect my db an do queries
