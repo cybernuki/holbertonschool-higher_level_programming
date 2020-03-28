@@ -17,7 +17,9 @@ if __name__ == '__main__':
 
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    for state in session.query(State).order_by(State.id):
-        if search == state.name:
-            print("{}: {}".format(state.id, state.name))
+    try:
+        states = session.query(State).order_by(State.id)
+        idx = states.index(search)
+        print("{}".format(states[idx].id))
+    except ValueError:
+        print("Not found")
