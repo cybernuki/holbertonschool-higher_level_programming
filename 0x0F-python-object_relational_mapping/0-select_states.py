@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 #This script show all values from states table
 from sys import argv
 import MySQLdb
