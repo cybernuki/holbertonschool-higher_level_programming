@@ -3,7 +3,7 @@
 # Inherits from SQLAlchemy Base and links to the MySQL table states.
 
 """ Model State """
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
