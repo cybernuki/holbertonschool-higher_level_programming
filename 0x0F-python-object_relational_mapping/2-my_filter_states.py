@@ -13,6 +13,7 @@ if __name__ == '__main__':
         db=db_name)
 
     cur = db.cursor()
-    cur.execute("SELECT * FROM states WHERE BINARY name in ('{}')".format(search))
+    cur.execute("SELECT * FROM states WHERE BINARY name in ('{}')".format(
+        search))
 
     [print(state) for state in cur.fetchall()]
