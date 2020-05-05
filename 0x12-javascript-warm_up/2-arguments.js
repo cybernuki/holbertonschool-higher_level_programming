@@ -3,8 +3,7 @@
 // This script interpretates the argv
 
 if (process.argv.length > 2) {
-        console.log('Argument found');
-}
-else {
-        console.log('No argument');
+  console.log('Argument found');
+} else {
+  console.log('No argument');
 }
