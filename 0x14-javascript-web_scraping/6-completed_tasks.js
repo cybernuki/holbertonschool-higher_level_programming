@@ -9,8 +9,8 @@ request(url, (error, Response, body) => {
     JSON.parse(body).forEach((task) => {
       const user = task.userId;
       const done = task.completed;
-      if (!result[user]) result[user] = 0;
-      result[user] = (done) ? result[user] + 1 : result[user];
+      if (!result[user] && done) result[user] = 1;
+      else if (done) result[user] = result[user] + 1;
     });
     console.log(result);
   }
