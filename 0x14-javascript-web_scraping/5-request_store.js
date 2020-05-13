@@ -5,11 +5,4 @@ const fs = require('fs');
 const url = `${process.argv[2]}`;
 const path = `${process.argv[3]}`;
 
-request(url, function (error, response, body) {
-  if (!error) {
-    console.log(body);
-    fs.writeFile(path, body, 'utf8', (error) => {
-      if (error) console.log(error);
-    });
-  }
-});
+request(url).pipe(fs.createWriteStream(path));
