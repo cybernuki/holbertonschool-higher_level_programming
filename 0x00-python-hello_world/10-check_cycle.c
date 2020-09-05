@@ -6,16 +6,19 @@
  */
 int check_cycle(listint_t *list)
 {
-	listint_t *faster = list;
-	listint_t *slower = list;
+	int cycle = 0;
+	listint_t *tortoise = NULL, *hare = NULL;
 
-	while (faster && faster->next)
+	if (!list)
+		return (cycle);
+
+	tortoise = list, hare = tortoise->next;
+	while (hare && hare->next && hare->next->next)
 	{
-		slower = slower->next;
-		faster = faster->next->next;
-
-		if(slower == faster)
+		if (tortoise == hare)
 			return (1);
+		tortoise = tortoise->next;
+		hare = hare->next->next;
 	}
-	return (0);
+	return (cycle);
 }
